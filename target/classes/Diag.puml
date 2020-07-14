@@ -1,0 +1,30 @@
+@startuml
+
+interface Machinery{
+}
+class Person{
+}
+class Task{
+}
+class PersonTask{
+}
+together {
+    class Assembly{
+    }
+
+    class Car{
+    }
+
+    class Part{
+    }
+}
+
+Car .. Machinery
+Machinery .. Assembly
+Machinery .. Part
+
+Assembly *--Part
+Car *--Assembly
+Task -- PersonTask
+PersonTask -- Person
+@enduml

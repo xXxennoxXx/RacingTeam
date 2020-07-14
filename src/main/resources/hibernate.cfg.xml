@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="connection.url">jdbc:postgresql://localhost:5432/racingTeam</property>
+        <property name="connection.driver_class">org.postgresql.Driver</property>
+
+        <property name="hibernate.connection.username">app</property>
+        <property name="hibernate.connection.password">1234</property>
+
+        <!--        <property name="connection_pool_size">1</property>-->
+        <!--        <property name="hbm2ddl.auto">update</property>-->
+        <property name="hbm2ddl.auto">update</property>
+        <property name="show_sql">true</property>
+        <mapping class="entities.Part"/>
+        <mapping class="entities.Assembly"/>
+        <mapping class="entities.Person"/>
+        <mapping class="entities.Task"/>
+        <mapping class="entities.PersonTask"/>
+        <mapping class="entities.PersonTaskId"/>
+    </session-factory>
+</hibernate-configuration>
