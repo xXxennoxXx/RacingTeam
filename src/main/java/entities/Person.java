@@ -27,6 +27,8 @@ public class Person {
             cascade = CascadeType.ALL,
             fetch = FetchType.LAZY)
     private Set<PersonTask> tasks;
+    @ManyToOne
+    private Department department;
 
     @CreationTimestamp
     @Column(nullable = false)
@@ -50,13 +52,27 @@ public class Person {
         return tasks.add(task);
     }
 
+    public PersonTask addTask(Task task) {
+        Optional<PersonTask> first = tasks.stream().filter(e -> e.getTask().equals(task)).findFirst();
+        return first.orElseGet(() -> new PersonTask(this, task));
+    }
+
     private boolean isPersonContainTask(PersonTask task) {
         return tasks.contains(task);
     }
 
-    public PersonTask addTask(Task task) {
-        Optional<PersonTask> first = tasks.stream().filter(e -> e.getTask().equals(task)).findFirst();
-        return first.orElseGet(() -> new PersonTask(this, task));
+    public void assignToDepartment(Department department) {
+        this.department = department;
+        department.addPerson(this);
+    }
+
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
     }
 
     public LocalDateTime getCreatedTimestamp() {
@@ -118,13 +134,15 @@ public class Person {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Person)) return false;
         Person person = (Person) o;
-        return Objects.equals(id, person.id);
+        return Objects.equals(id, person.id) &&
+                firstName.equals(person.firstName) &&
+                lastName.equals(person.lastName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, firstName, lastName);
     }
 }

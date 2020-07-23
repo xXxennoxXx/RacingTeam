@@ -7,5 +7,11 @@
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
       <jdbc-url>jdbc:postgresql://localhost:5432/racingTeam</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="PostgreSQL - racingTeam@localhost" uuid="1aa5886d-0019-4b43-9c56-fbe9b57dbc50">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/racingTeam</jdbc-url>
+    </data-source>
   </component>
 </project>
